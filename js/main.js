@@ -30,5 +30,5 @@ function getRandomFloat(min, max, fractionDigits) {
     return randomFloat;
   }
 }
-getRandomFloat(10, 20, 1);
+getRandomFloat(10.5, 20.7, 2);
 
