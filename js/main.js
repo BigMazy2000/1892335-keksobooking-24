@@ -19,6 +19,7 @@ getRandomInt (10,20);
 // Функция, возвращающая случайное число с плавающей точкой из переданного диапазона ВКЛЮЧИТЕЛЬНО! 
 //Результат: число с плавающей точкой из диапазона "от...до" с указанным "количеством знаков после запятой"
 // Параметры min и max проверяются на условия: max<=min, оба параметра положительные числа. 
+// При выполнении этих условий в консоль выводится сообщение "Incorrect data"
 
 function getRandomFloat(min, max, fractionDigits) {
   if (max <= min || min < 0) {
@@ -30,5 +31,5 @@ function getRandomFloat(min, max, fractionDigits) {
     return randomFloat;
   }
 }
-getRandomFloat(10.5, 20.7, 2);
+getRandomFloat(10.5, 20.7, 2); 
 
