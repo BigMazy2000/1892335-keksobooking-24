@@ -143,4 +143,4 @@ function getOffers() {
   return (offers);
 }
 getAuthors();
-console.log(getOffers());
+getOffers();
