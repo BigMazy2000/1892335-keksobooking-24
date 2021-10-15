@@ -37,7 +37,8 @@ const LOC_LNG_MIN = 139.70000;
 const LOC_LNG_MAX = 139.80000;
 const PRICE_MIN = 50;
 const PRICE_MAX = 1000;
-const locations = getLocations();
+const ROOMS_MAX = 6;
+const GUESTS_MAX = 10;
 
 function getRandomInt(min, max) {
   min = Math.ceil(min);
@@ -83,64 +84,69 @@ function getFeatures(arrayName) {
   return selectedFeatures;
 }
 
-function getLocations() {
-  const result = [];
-  for (let i = 1; i <= numberOfRecords; i++) {
-    const lat = getRandomFloat(LOC_LAT_MIN, LOC_LAT_MAX, 5);
-    const lng = getRandomFloat(LOC_LNG_MIN, LOC_LNG_MAX, 5);
-    const currentLocation = {
-      lat,
-      lng,
-    };
-    result.push(currentLocation);
-  }
-  return result;
+function getAuthor(number) {
+
+  const indexString = String(number).padStart(2, '0');
+  const fileName = `/img/avatars/user${indexString}.png`;
+  const currentAvatar = {
+    avatar: fileName,
+  };
+  return currentAvatar;
 }
 
-function getAuthors() {
-  const authors = [];
-  for (let i = 1; i <= numberOfRecords; i++) {
-    const indexString = String(i).padStart(2, '0');
-    const fileName = `/img/avatars/user${indexString}.png`;
-    const currentAvatar = {
-      avatar: fileName,
-    };
-    authors.push(currentAvatar);
-  }
-  return authors;
+function getLocation() {
+  const lat = getRandomFloat(LOC_LAT_MIN, LOC_LAT_MAX, 5);
+  const lng = getRandomFloat(LOC_LNG_MIN, LOC_LNG_MAX, 5);
+  const currentLocation = {
+    lat,
+    lng,
+  };
+  return currentLocation;
 }
 
-function getOffers() {
-  const offers = [];
-  for (let j = 0; j <= numberOfRecords - 1; j++) {
-    const price = getRandomInt(PRICE_MIN, PRICE_MAX);
-    const rooms = getRandomInt(1, 6);
-    const currentType = TYPE[getRandomInt(0, 4)];
-    const guests = getRandomInt(1, 10);
-    const checkIn = CHECK_TIME[getRandomInt(0, 2)];
-    const checkOut = CHECK_TIME[getRandomInt(0, 2)];
-    let currentFeatures = [];
-    currentFeatures = getFeatures(FEATURES);
-    let currentPictures = [];
-    currentPictures = getFeatures(PICTURES);
-    const currentOffer = {
-      offer: {
-        title: TITLES[j],
-        price: price,
-        address: locations[j],
-        type: currentType,
-        rooms: rooms,
-        guests: guests,
-        checkIn: checkIn,
-        checkOut: checkOut,
-        features: currentFeatures,
-        description: DESCRIPTIONS[j],
-        photos: currentPictures,
-      },
-    };
-    offers.push(currentOffer);
-  }
-  return (offers);
+function getOffer(index, address) {
+  let currentOffer = [];
+  const price = getRandomInt(PRICE_MIN, PRICE_MAX);
+  const rooms = getRandomInt(1, ROOMS_MAX);
+  const currentType = TYPE[getRandomInt(0, 4)];
+  const guests = getRandomInt(1, GUESTS_MAX);
+  const checkIn = CHECK_TIME[getRandomInt(0, 2)];
+  const checkOut = CHECK_TIME[getRandomInt(0, 2)];
+  let currentFeatures = [];
+  currentFeatures = getFeatures(FEATURES);
+  let currentPictures = [];
+  currentPictures = getFeatures(PICTURES);
+  currentOffer = {
+    title: TITLES[index],
+    price: price,
+    address: address,
+    type: currentType,
+    rooms: rooms,
+    guests: guests,
+    checkIn: checkIn,
+    checkOut: checkOut,
+    features: currentFeatures,
+    description: DESCRIPTIONS[index],
+    photos: currentPictures,
+  };
+  return currentOffer;
 }
-getAuthors();
-getOffers();
+
+function createFinalObject() {
+  const finalObject = [];
+  for (let i = 0; i < numberOfRecords; i++) {
+    const author = getAuthor(i);
+    const location = getLocation();
+    const currentAddress = `${location.lat}, ${location.lng}`;
+    const offer = getOffer(i, currentAddress);
+    const finalObjectElement = {
+      ...author,
+      ...location,
+      ...offer,
+    };
+    finalObject.push(finalObjectElement);
+  }
+  return finalObject;
+}
+
+createFinalObject();
