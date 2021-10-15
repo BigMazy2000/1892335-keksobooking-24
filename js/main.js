@@ -140,9 +140,9 @@ function createFinalObject() {
     const currentAddress = `${location.lat}, ${location.lng}`;
     const offer = getOffer(i, currentAddress);
     const finalObjectElement = {
-      ...author,
-      ...location,
-      ...offer,
+      author,
+      location,
+      offer,
     };
     finalObject.push(finalObjectElement);
   }
