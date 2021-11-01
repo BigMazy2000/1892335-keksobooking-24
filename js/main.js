@@ -1,2 +1,1 @@
-import {createFinalObject} from './utils/data.js';
-createFinalObject();
+import './popup.js';

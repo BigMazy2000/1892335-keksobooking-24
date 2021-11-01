@@ -1,6 +1,13 @@
-import {getRandomInt} from './get-random-positive-integer.js';
-import {getRandomFloat} from './get-random-positive-float.js';
-import {createRandomIdFromRangeGenerator} from './get-random-id.js';
+import {
+  getRandomInt
+} from './utils/get-random-positive-integer.js';
+import {
+  getRandomFloat
+} from './utils/get-random-positive-float.js';
+import {
+  createRandomIdFromRangeGenerator
+} from './utils/get-random-id.js';
+
 const numberOfRecords = 10;
 const TITLES = [
   'Заголовок предложения 1',
@@ -105,7 +112,7 @@ function getOffer(index, address) {
 function createFinalObject() {
   const finalObject = [];
   for (let i = 0; i < numberOfRecords; i++) {
-    const author = getAuthor(i);
+    const author = getAuthor(i+1);
     const location = getLocation();
     const currentAddress = `${location.lat}, ${location.lng}`;
     const offer = getOffer(i, currentAddress);
@@ -118,4 +125,6 @@ function createFinalObject() {
   }
   return finalObject;
 }
-export {createFinalObject};
+export {
+  createFinalObject
+};
