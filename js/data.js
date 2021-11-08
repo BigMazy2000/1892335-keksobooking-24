@@ -50,6 +50,11 @@ const PRICE_MAX = 1000;
 const ROOMS_MAX = 6;
 const GUESTS_MAX = 10;
 
+const MIN_TITLE_LENGTH = 30;
+const MAX_TITLE_LENGTH = 100;
+const MAX_PRICE = 1000000;
+
+
 function getFeatures(arrayName) {
   const featuresRange = getRandomInt(1, arrayName.length);
   const idRange = createRandomIdFromRangeGenerator(featuresRange, arrayName);
@@ -112,7 +117,7 @@ function getOffer(index, address) {
 function createFinalObject() {
   const finalObject = [];
   for (let i = 0; i < numberOfRecords; i++) {
-    const author = getAuthor(i+1);
+    const author = getAuthor(i + 1);
     const location = getLocation();
     const currentAddress = `${location.lat}, ${location.lng}`;
     const offer = getOffer(i, currentAddress);
@@ -127,4 +132,10 @@ function createFinalObject() {
 }
 export {
   createFinalObject
+};
+
+export {
+  MIN_TITLE_LENGTH,
+  MAX_TITLE_LENGTH,
+  MAX_PRICE
 };
