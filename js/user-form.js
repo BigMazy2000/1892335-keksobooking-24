@@ -41,6 +41,8 @@ priceInput.addEventListener('input', () => {
   const priceValue = priceInput.value;
   if (priceValue > MAX_PRICE) {
     priceInput.setCustomValidity(`Цена должна быть меньше ${  MAX_PRICE }`);
+  } else if (priceValue < Number(priceInput.min)) {
+    priceInput.setCustomValidity(`Цена должна быть больше или равна ${  priceInput.min }`);
   } else {
     priceInput.setCustomValidity('');
   }
@@ -59,13 +61,12 @@ addressInput.addEventListener('input', () => {
   addressInput.reportValidity();
 });
 
-
 const typeSelect = document.getElementById('type');
-
 typeSelect.addEventListener('change', () => {
   const selectedType = typeSelect.value;
   const propperPlaceholder = getPlaceholder(selectedType);
   priceInput.placeholder = propperPlaceholder;
+  priceInput.min = Number(propperPlaceholder);
 });
 
 const roomNumber = document.getElementById('room_number');
@@ -79,14 +80,16 @@ roomNumber.addEventListener('change', () => {
   checkingRoomsAndGuests();
 
 });
+
 function checkingRoomsAndGuests() {
 
   const selectedRoomNumber = Number(roomNumber.value);
   switch (selectedRoomNumber) {
     case 100:
       options.forEach((element) => {
-        if (Number(element.value) !== 0) {element.setAttribute('disabled', 'disabled');}
-        else {
+        if (Number(element.value) !== 0) {
+          element.setAttribute('disabled', 'disabled');
+        } else {
           element.removeAttribute('disabled');
         }
       });
@@ -94,27 +97,51 @@ function checkingRoomsAndGuests() {
 
     case 1:
       options.forEach((element) => {
-        if (Number(element.value) !== 1) {element.setAttribute('disabled', 'disabled');}
-        else {
+        if (Number(element.value) !== 1) {
+          element.setAttribute('disabled', 'disabled');
+        } else {
           element.removeAttribute('disabled');
         }
       });
       break;
     case 2:
       options.forEach((element) => {
-        if (Number(element.value) !== 2 && Number(element.value) !== 1) {element.setAttribute('disabled', 'disabled');}
-        else {
+        if (Number(element.value) !== 2 && Number(element.value) !== 1) {
+          element.setAttribute('disabled', 'disabled');
+        } else {
           element.removeAttribute('disabled');
         }
       });
       break;
     case 3:
       options.forEach((element) => {
-        if (Number(element.value) !== 3 && Number(element.value) !== 2 && Number(element.value) !== 1) {element.setAttribute('disabled', 'disabled');}
-        else {
+        if (Number(element.value) !== 3 && Number(element.value) !== 2 && Number(element.value) !== 1) {
+          element.setAttribute('disabled', 'disabled');
+        } else {
           element.removeAttribute('disabled');
         }
       });
       break;
   }
+}
+
+const checkInTime = document.getElementById('timein');
+const checkOutTime = document.getElementById('timeout');
+const checkOutOptions = checkOutTime.querySelectorAll('option');
+
+checkingInOutTime();
+checkInTime.addEventListener('change', () => {
+  checkingInOutTime();
+});
+
+function checkingInOutTime() {
+  const selectedCheckInTime = checkInTime.value;
+  checkOutOptions.forEach((element) => {
+    if (element.value !== selectedCheckInTime) {
+      element.setAttribute('disabled', 'disabled');
+    } else {
+      element.removeAttribute('disabled');
+      checkOutTime.value=selectedCheckInTime;
+    }
+  });
 }
