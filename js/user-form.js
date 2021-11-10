@@ -20,7 +20,6 @@ function getPlaceholder(accommodation) {
       'не установлено';
   }
 }
-
 const titleInput = document.getElementById('title');
 titleInput.setCustomValidity('Заполните это поле');
 titleInput.addEventListener('input', () => {
@@ -34,7 +33,6 @@ titleInput.addEventListener('input', () => {
   }
   titleInput.reportValidity();
 });
-
 const priceInput = document.getElementById('price');
 priceInput.setCustomValidity('Укажите цену');
 priceInput.addEventListener('input', () => {
@@ -48,7 +46,6 @@ priceInput.addEventListener('input', () => {
   }
   priceInput.reportValidity();
 });
-
 const addressInput = document.getElementById('address');
 addressInput.setCustomValidity('Введите адрес');
 addressInput.addEventListener('input', () => {
@@ -60,7 +57,6 @@ addressInput.addEventListener('input', () => {
   }
   addressInput.reportValidity();
 });
-
 const typeSelect = document.getElementById('type');
 typeSelect.addEventListener('change', () => {
   const selectedType = typeSelect.value;
@@ -68,21 +64,15 @@ typeSelect.addEventListener('change', () => {
   priceInput.placeholder = propperPlaceholder;
   priceInput.min = Number(propperPlaceholder);
 });
-
 const roomNumber = document.getElementById('room_number');
 const guestNumber = document.getElementById('capacity');
 const options = guestNumber.querySelectorAll('option');
-
 checkingRoomsAndGuests();
-
 roomNumber.addEventListener('change', () => {
-
   checkingRoomsAndGuests();
-
 });
 
 function checkingRoomsAndGuests() {
-
   const selectedRoomNumber = Number(roomNumber.value);
   switch (selectedRoomNumber) {
     case 100:
@@ -94,7 +84,6 @@ function checkingRoomsAndGuests() {
         }
       });
       break;
-
     case 1:
       options.forEach((element) => {
         if (Number(element.value) !== 1) {
@@ -124,11 +113,9 @@ function checkingRoomsAndGuests() {
       break;
   }
 }
-
 const checkInTime = document.getElementById('timein');
 const checkOutTime = document.getElementById('timeout');
 const checkOutOptions = checkOutTime.querySelectorAll('option');
-
 checkingInOutTime();
 checkInTime.addEventListener('change', () => {
   checkingInOutTime();
@@ -141,7 +128,7 @@ function checkingInOutTime() {
       element.setAttribute('disabled', 'disabled');
     } else {
       element.removeAttribute('disabled');
-      checkOutTime.value=selectedCheckInTime;
+      checkOutTime.value = selectedCheckInTime;
     }
   });
 }

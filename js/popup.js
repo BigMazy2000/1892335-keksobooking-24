@@ -1,11 +1,7 @@
 import {
   createFinalObject
 } from './data.js';
-
-const adTemplate = document.querySelector('#card');
-const newAd = adTemplate.content.querySelector('.popup');
 const newOffers = createFinalObject();
-const offerFragment = document.createDocumentFragment();
 
 function translate(english) {
   switch (english) {
@@ -34,12 +30,8 @@ function addPictures(element, block) {
   });
 }
 
-let marker = 0;
-const randomElement = document.createDocumentFragment();
-newOffers.forEach(({
-  offer,
-  author,
-}) => {
+function makeMapElement(author, offer) {
+  const newAd = document.querySelector('#card').content.querySelector('.popup');
   const offerElement = newAd.cloneNode(true);
   if (offer.title.length) {
     offerElement.querySelector('.popup__title').textContent = offer.title;
@@ -89,13 +81,10 @@ newOffers.forEach(({
   const block = offerElement.querySelector('.popup__photos');
   if (block) {
     addPictures(offer.photos, block);
-    if (marker === 9) {
-      randomElement.appendChild(offerElement);
-    }
-    marker++;
   }
-});
-
-const adOnMap = document.querySelector('#map-canvas');
-adOnMap.appendChild(randomElement);
-offerFragment;
+  return offerElement;
+}
+export {
+  makeMapElement,
+  newOffers
+};
