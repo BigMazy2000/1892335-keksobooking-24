@@ -7,7 +7,6 @@ import {
 import {
   createRandomIdFromRangeGenerator
 } from './utils/get-random-id.js';
-
 const numberOfRecords = 10;
 const TITLES = [
   'Заголовок предложения 1',
@@ -54,7 +53,6 @@ const MIN_TITLE_LENGTH = 30;
 const MAX_TITLE_LENGTH = 100;
 const MAX_PRICE = 1000000;
 
-
 function getFeatures(arrayName) {
   const featuresRange = getRandomInt(1, arrayName.length);
   const idRange = createRandomIdFromRangeGenerator(featuresRange, arrayName);
@@ -67,7 +65,6 @@ function getFeatures(arrayName) {
 }
 
 function getAuthor(number) {
-
   const indexString = String(number).padStart(2, '0');
   const fileName = `/img/avatars/user${indexString}.png`;
   const currentAvatar = {
@@ -133,7 +130,6 @@ function createFinalObject() {
 export {
   createFinalObject
 };
-
 export {
   MIN_TITLE_LENGTH,
   MAX_TITLE_LENGTH,
