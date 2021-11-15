@@ -37,7 +37,7 @@ titleInput.addEventListener('input', () => {
   titleInput.reportValidity();
 });
 const priceInput = document.getElementById('price');
-priceInput.setCustomValidity('Установите цену');
+priceInput.setCustomValidity('Укажите цену');
 priceInput.addEventListener('input', () => {
   const priceValue = priceInput.value;
   if (priceValue > MAX_PRICE) {
