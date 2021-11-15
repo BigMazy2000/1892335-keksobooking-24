@@ -1,9 +1,4 @@
-import {
-  createFinalObject
-} from './data.js';
-const newOffers = createFinalObject();
-
-function translate(english) {
+const translate = function (english) {
   switch (english) {
     case 'flat':
       return 'Квартира';
@@ -18,19 +13,19 @@ function translate(english) {
     default:
       'Неизвестен';
   }
-}
-
-function addPictures(element, block) {
+};
+const addPictures = function (element, block) {
   const img = block.querySelector('img');
   block.textContent = '';
-  element.forEach((el) => {
-    const imgElement = img.cloneNode(true);
-    imgElement.src = el;
-    block.appendChild(imgElement);
-  });
-}
-
-function makeMapElement(author, offer) {
+  if (typeof (element) !== 'undefined') {
+    element.forEach((el) => {
+      const imgElement = img.cloneNode(true);
+      imgElement.src = el;
+      block.appendChild(imgElement);
+    });
+  }
+};
+const makeMapElement = function (author, offer) {
   const newAd = document.querySelector('#card').content.querySelector('.popup');
   const offerElement = newAd.cloneNode(true);
   if (offer.title.length) {
@@ -58,8 +53,8 @@ function makeMapElement(author, offer) {
   } else {
     offerElement.querySelector('.popup__text--capacity').remove('.popup__text--capacity');
   }
-  if (offer.checkIn.length && offer.checkOut.length) {
-    offerElement.querySelector('.popup__text--time').textContent = `Заезд после ${offer.checkIn}, выезд до ${offer.checkOut}`;
+  if (offer.checkin.length && offer.checkout.length) {
+    offerElement.querySelector('.popup__text--time').textContent = `Заезд после ${offer.checkin}, выезд до ${offer.checkout}`;
   } else {
     offerElement.querySelector('.popup__text--time').remove('.popup__text--time');
   }
@@ -83,8 +78,7 @@ function makeMapElement(author, offer) {
     addPictures(offer.photos, block);
   }
   return offerElement;
-}
+};
 export {
-  makeMapElement,
-  newOffers
+  makeMapElement
 };

@@ -1,6 +1,5 @@
 import {
-  makeMapElement,
-  newOffers
+  makeMapElement
 } from './popup.js';
 import {
   deactivateForm,
@@ -57,10 +56,18 @@ const createMarker = (author, location, offer) => {
     .addTo(markerGroup)
     .bindPopup(makeMapElement(author, offer));
 };
-newOffers.forEach(({
-  author,
-  location,
-  offer,
-}) => {
-  createMarker(author, location, offer);
-});
+const renderDomains = function (domain) {
+  domain.forEach(({
+    author,
+    location,
+    offer,
+  }) => {
+    createMarker(author, location, offer);
+  });
+};
+export {
+  renderDomains,
+  myMap,
+  mainPinMarker,
+  markerGroup
+};

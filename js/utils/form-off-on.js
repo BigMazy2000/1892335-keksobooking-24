@@ -1,4 +1,4 @@
-function deactivateForm() {
+const deactivateForm = function () {
   const adForm = document.querySelector('.ad-form');
   adForm.classList.add('ad-form--disabled');
   const interactiveElements = adForm.querySelectorAll('fieldset');
@@ -15,9 +15,8 @@ function deactivateForm() {
   mapFiltersSelect.forEach((element) => {
     element.setAttribute('disabled', 'disabled');
   });
-}
-
-function activateForm() {
+};
+const activateForm = function () {
   const adForm = document.querySelector('.ad-form');
   adForm.classList.remove('ad-form--disabled');
   const interactiveElements = adForm.querySelectorAll('fieldset');
@@ -34,7 +33,7 @@ function activateForm() {
   mapFiltersSelect.forEach((element) => {
     element.removeAttribute('disabled', 'disabled');
   });
-}
+};
 export {
   deactivateForm,
   activateForm

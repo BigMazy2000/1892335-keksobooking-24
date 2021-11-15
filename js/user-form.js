@@ -3,8 +3,11 @@ import {
   MAX_TITLE_LENGTH,
   MAX_PRICE
 } from './data.js';
+import {
+  formReset
+} from './form-submit.js';
 
-function getPlaceholder(accommodation) {
+const getPlaceholder = function (accommodation) {
   switch (accommodation) {
     case 'flat':
       return '1000';
@@ -19,7 +22,7 @@ function getPlaceholder(accommodation) {
     default:
       'не установлено';
   }
-}
+};
 const titleInput = document.getElementById('title');
 titleInput.setCustomValidity('Заполните это поле');
 titleInput.addEventListener('input', () => {
@@ -132,3 +135,5 @@ function checkingInOutTime() {
     }
   });
 }
+const resetLink = document.querySelector('.ad-form__reset');
+resetLink.addEventListener('click', formReset);
