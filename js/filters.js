@@ -2,7 +2,8 @@ import {
   markerGroup,
   renderDomains
 } from './map.js';
-const setFilters = function (domain) {
+
+const setFilters = (domain) => {
   let filterResult = domain;
   const selectedHousingType = document.querySelector('[name="housing-type"]').value;
   const selectedHousingPrice = document.querySelector('[name="housing-price"]').value;
@@ -36,7 +37,7 @@ const setFilters = function (domain) {
   if (selectedHousingGuests !== 'any') {
     filterResult = filterResult.filter((item) => item.offer.guests === selectedHousingGuests);
   }
-  const selectFeatures = function (param, feature) {
+  const selectFeatures = (param, feature) => {
     if (param.checked) {
       filterResult = filterResult.filter((item) => {
         if (typeof item.offer.features !== 'undefined') {
@@ -54,6 +55,7 @@ const setFilters = function (domain) {
   markerGroup.clearLayers();
   renderDomains(filterResult);
 };
+
 const formElements = document.querySelectorAll('.map__filters select, .map__filters input[type="checkbox"]');
 const setFiltersClick = (domain) => {
   formElements.forEach((item) => {
@@ -62,6 +64,7 @@ const setFiltersClick = (domain) => {
     });
   });
 };
+
 export {
   setFilters,
   setFiltersClick

@@ -1,13 +1,20 @@
 import {
   MIN_TITLE_LENGTH,
   MAX_TITLE_LENGTH,
-  MAX_PRICE
+  MAX_PRICE,
+  BASE_LAT,
+  BASE_LNG
 } from './data.js';
 import {
   formReset
 } from './form-submit.js';
 
-const getPlaceholder = function (accommodation) {
+const GUEST_NUMBER_ONE = 1;
+const GUEST_NUMBER_TWO = 2;
+const GUEST_NUMBER_THREE = 3;
+const GUEST_NUMBER_HUNDRED = 100;
+
+const getPlaceholder = (accommodation) => {
   switch (accommodation) {
     case 'flat':
       return '1000';
@@ -23,6 +30,9 @@ const getPlaceholder = function (accommodation) {
       'не установлено';
   }
 };
+
+const baseCoordinates = document.getElementById('address');
+baseCoordinates.value = `${BASE_LAT} ${BASE_LNG}`;
 const titleInput = document.getElementById('title');
 titleInput.setCustomValidity('Заполните это поле');
 titleInput.addEventListener('input', () => {
@@ -36,6 +46,7 @@ titleInput.addEventListener('input', () => {
   }
   titleInput.reportValidity();
 });
+
 const priceInput = document.getElementById('price');
 priceInput.setCustomValidity('Укажите цену');
 priceInput.addEventListener('input', () => {
@@ -49,6 +60,7 @@ priceInput.addEventListener('input', () => {
   }
   priceInput.reportValidity();
 });
+
 const addressInput = document.getElementById('address');
 addressInput.setCustomValidity('Введите адрес');
 addressInput.addEventListener('input', () => {
@@ -60,6 +72,7 @@ addressInput.addEventListener('input', () => {
   }
   addressInput.reportValidity();
 });
+
 const typeSelect = document.getElementById('type');
 typeSelect.addEventListener('change', () => {
   const selectedType = typeSelect.value;
@@ -67,6 +80,7 @@ typeSelect.addEventListener('change', () => {
   priceInput.placeholder = propperPlaceholder;
   priceInput.min = Number(propperPlaceholder);
 });
+
 const roomNumber = document.getElementById('room_number');
 const guestNumber = document.getElementById('capacity');
 const options = guestNumber.querySelectorAll('option');
@@ -78,7 +92,7 @@ roomNumber.addEventListener('change', () => {
 function checkingRoomsAndGuests() {
   const selectedRoomNumber = Number(roomNumber.value);
   switch (selectedRoomNumber) {
-    case 100:
+    case GUEST_NUMBER_HUNDRED:
       options.forEach((element) => {
         if (Number(element.value) !== 0) {
           element.setAttribute('disabled', 'disabled');
@@ -87,7 +101,7 @@ function checkingRoomsAndGuests() {
         }
       });
       break;
-    case 1:
+    case GUEST_NUMBER_ONE:
       options.forEach((element) => {
         if (Number(element.value) !== 1) {
           element.setAttribute('disabled', 'disabled');
@@ -96,7 +110,7 @@ function checkingRoomsAndGuests() {
         }
       });
       break;
-    case 2:
+    case GUEST_NUMBER_TWO:
       options.forEach((element) => {
         if (Number(element.value) !== 2 && Number(element.value) !== 1) {
           element.setAttribute('disabled', 'disabled');
@@ -105,7 +119,7 @@ function checkingRoomsAndGuests() {
         }
       });
       break;
-    case 3:
+    case GUEST_NUMBER_THREE:
       options.forEach((element) => {
         if (Number(element.value) !== 3 && Number(element.value) !== 2 && Number(element.value) !== 1) {
           element.setAttribute('disabled', 'disabled');
@@ -116,10 +130,12 @@ function checkingRoomsAndGuests() {
       break;
   }
 }
+
 const checkInTime = document.getElementById('timein');
 const checkOutTime = document.getElementById('timeout');
 const checkOutOptions = checkOutTime.querySelectorAll('option');
 checkingInOutTime();
+
 checkInTime.addEventListener('change', () => {
   checkingInOutTime();
 });
@@ -135,5 +151,6 @@ function checkingInOutTime() {
     }
   });
 }
+
 const resetLink = document.querySelector('.ad-form__reset');
 resetLink.addEventListener('click', formReset);
