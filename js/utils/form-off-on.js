@@ -1,4 +1,4 @@
-const deactivateForm = function () {
+const deactivateForm = () => {
   const adForm = document.querySelector('.ad-form');
   adForm.classList.add('ad-form--disabled');
   const interactiveElements = adForm.querySelectorAll('fieldset');
@@ -16,7 +16,8 @@ const deactivateForm = function () {
     element.setAttribute('disabled', 'disabled');
   });
 };
-const activateForm = function () {
+
+const activateForm = () => {
   const adForm = document.querySelector('.ad-form');
   adForm.classList.remove('ad-form--disabled');
   const interactiveElements = adForm.querySelectorAll('fieldset');
@@ -34,6 +35,7 @@ const activateForm = function () {
     element.removeAttribute('disabled', 'disabled');
   });
 };
+
 export {
   deactivateForm,
   activateForm

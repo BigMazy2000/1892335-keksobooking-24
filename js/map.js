@@ -5,37 +5,48 @@ import {
   deactivateForm,
   activateForm
 } from './utils/form-off-on.js';
+import {
+  BASE_LAT,
+  BASE_LNG,
+  ZOOM
+} from './data.js';
+
 deactivateForm();
 const myMap = L.map('map-canvas')
   .on('load', () => activateForm())
   .setView({
-    lat: 35.6819,
-    lng: 139.7522,
-  }, 12);
+    lat: BASE_LAT,
+    lng: BASE_LNG,
+  }, ZOOM);
 L.tileLayer(
   'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
   },
 ).addTo(myMap);
+
 const mainPinIcon = L.icon({
   iconUrl: './img/main-pin.svg',
   iconSize: [30, 50],
   iconAnchor: [15, 50],
 });
+
 const mainPinMarker = L.marker({
-  lat: 35.6819,
-  lng: 139.7522,
+  lat: BASE_LAT,
+  lng: BASE_LNG,
 }, {
   draggable: true,
   icon: mainPinIcon,
 });
+
 const mapAddressInput = document.getElementById('address');
 mainPinMarker.addTo(myMap);
 mainPinMarker.on('moveend', (evt) => {
   const coordinates = evt.target.getLatLng();
-  mapAddressInput.value = (`${coordinates.lat.toFixed(4)} ${coordinates.lng.toFixed(4)}`);
+  mapAddressInput.value = (`${coordinates.lat.toFixed(5)} ${coordinates.lng.toFixed(5)}`);
 });
+
 const markerGroup = L.layerGroup().addTo(myMap);
+
 const createMarker = (author, location, offer) => {
   const {
     lat,
@@ -56,7 +67,8 @@ const createMarker = (author, location, offer) => {
     .addTo(markerGroup)
     .bindPopup(makeMapElement(author, offer));
 };
-const renderDomains = function (domain) {
+
+const renderDomains = (domain) => {
   domain.forEach(({
     author,
     location,
@@ -65,6 +77,7 @@ const renderDomains = function (domain) {
     createMarker(author, location, offer);
   });
 };
+
 export {
   renderDomains,
   myMap,

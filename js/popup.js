@@ -1,4 +1,4 @@
-const translate = function (english) {
+const translate = (english) => {
   switch (english) {
     case 'flat':
       return 'Квартира';
@@ -14,7 +14,8 @@ const translate = function (english) {
       'Неизвестен';
   }
 };
-const addPictures = function (element, block) {
+
+const addPictures = (element, block) => {
   const img = block.querySelector('img');
   block.textContent = '';
   if (typeof (element) !== 'undefined') {
@@ -25,7 +26,8 @@ const addPictures = function (element, block) {
     });
   }
 };
-const makeMapElement = function (author, offer) {
+
+const makeMapElement = (author, offer) => {
   const newAd = document.querySelector('#card').content.querySelector('.popup');
   const offerElement = newAd.cloneNode(true);
   if (offer.title.length) {
@@ -79,6 +81,7 @@ const makeMapElement = function (author, offer) {
   }
   return offerElement;
 };
+
 export {
   makeMapElement
 };

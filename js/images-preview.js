@@ -8,9 +8,11 @@ const handleAvatarSelect = function (evt) {
   })(selectedFile);
   reader.readAsDataURL(selectedFile);
 };
+
 export {
   handleAvatarSelect
 };
+
 const handleDomainSelect = function (evt) {
   const files = evt.target.files;
   const selectedFile = files[0];
@@ -22,22 +24,28 @@ const handleDomainSelect = function (evt) {
   })(selectedFile);
   reader.readAsDataURL(selectedFile);
 };
+
 document.getElementById('avatar').addEventListener('change', handleAvatarSelect, false);
 document.getElementById('images').addEventListener('change', handleDomainSelect, false);
+
 export {
   handleDomainSelect
 };
-const resetAvatarImage = function () {
+
+const resetAvatarImage = () => {
   const avatarImage = document.querySelector('.ad-form-header__preview img');
   avatarImage.src = './img/muffin-grey.svg';
 };
+
 export {
   resetAvatarImage
 };
-const resetAdPicture = function () {
+
+const resetAdPicture = () => {
   const adImage = document.querySelector('.ad-form__photo');
   adImage.innerHTML = '';
 };
+
 export {
   resetAdPicture
 };
